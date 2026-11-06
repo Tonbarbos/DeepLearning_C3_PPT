@@ -1,32 +1,38 @@
 # Pedra, papel e tesoura com MediaPipe
 
+**▶ Jogar: <https://tonbarbos.github.io/DeepLearning_C3_PPT/>**
+
 Aplicação web que reconhece pedra, papel e tesoura a partir dos 21 pontos da
 mão detectados pelo **MediaPipe Hand Landmarker** (API Tasks para Web). Depois
 de uma contagem regressiva, o gesto do jogador é travado e comparado com a
 jogada sorteada pela máquina. O placar é mantido entre as rodadas, em partidas
 de melhor de 5.
 
+Não há nada para instalar nem para baixar: basta abrir o link acima em um
+navegador e autorizar a câmera.
+
 Trabalho 2 (C2) — Visão Computacional · Computação · FAESA · 2026/2.
 
-## Como executar
+## Jogando pelo navegador
 
-A câmera do navegador só funciona em **contexto seguro**: `http://localhost` ou
-`https://`. Abrir o `index.html` direto pelo `file://` **não funciona**.
+1. Abra <https://tonbarbos.github.io/DeepLearning_C3_PPT/>.
+2. Autorize o acesso à câmera quando o navegador pedir.
+3. Mostre a mão: depois de um instante a contagem de 3 começa sozinha.
+4. Faça o gesto antes do fim da contagem e **segure** — a jogada é travada pela
+   leitura do último meio segundo.
+5. Vence a partida quem fizer 3 pontos primeiro.
 
-```bash
-python -m http.server 8000
-```
+Na primeira vez o navegador baixa cerca de 8 MB do MediaPipe (biblioteca e
+modelo) e guarda em cache; as visitas seguintes abrem na hora.
 
-Depois abra <http://localhost:8000> e autorize o acesso à câmera.
-
-Não há nada para instalar: o MediaPipe é carregado de CDN e o modelo
-(`hand_landmarker.task`, ~8 MB) é baixado pelo navegador na primeira execução e
-fica em cache.
+> **Por que funciona no GitHub Pages?** A câmera só é liberada em contexto
+> seguro, e o Pages serve por `https`. Pela mesma razão, abrir o `index.html`
+> direto do disco (`file://`) **não funciona** — veja a seção seguinte.
 
 ### Sem webcam
 
 ```
-http://localhost:8000/?teste=1
+https://tonbarbos.github.io/DeepLearning_C3_PPT/?teste=1
 ```
 
 Esse modo substitui a câmera por uma mão sintética que percorre os três gestos e
@@ -41,6 +47,19 @@ ao `--video` do Fruit Ninja da Aula 12.
 | `R` | nova partida |
 | `E` | liga/desliga o esqueleto da mão |
 | `D` | painel de depuração (fps, taxa de detecção, gesto bruto e estável) |
+
+## Rodando localmente
+
+Só é necessário para desenvolver ou para rodar os testes. Como a câmera exige
+contexto seguro, é preciso servir a pasta — `localhost` conta como seguro:
+
+```bash
+git clone https://github.com/Tonbarbos/DeepLearning_C3_PPT.git
+cd DeepLearning_C3_PPT
+python -m http.server 8000
+```
+
+Depois abra <http://localhost:8000>.
 
 ## Testes
 
@@ -74,9 +93,12 @@ qual gesto está sendo feito é do projeto, em `js/gestos.js`:
    último meio segundo, com mínimo de 4 leituras válidas. Um único quadro ruim
    não decide a rodada.
 
-O Gesture Recognizer pronto do MediaPipe **não** foi usado de propósito: ele já
-devolveria `Closed_Fist`, `Open_Palm` e `Victory`, entregando à biblioteca
-justamente o problema que o trabalho pede que a equipe resolva.
+A jogada da máquina é sorteada **no início da contagem**, antes de o gesto do
+jogador ser lido: assim não há como reagir ao que ela tirou.
+
+O Gesture Recognizer pronto do MediaPipe **não** foi usado: ele já devolveria
+`Closed_Fist`, `Open_Palm` e `Victory`, e a tabela de ideias da especificação
+aponta MediaPipe Hands para este projeto.
 
 ## Quando a detecção se perde
 
@@ -105,6 +127,11 @@ justamente o problema que o trabalho pede que a equipe resolva.
 A separação é a mesma recomendada na especificação: dá para mudar uma regra do
 jogo sem tocar na parte de visão computacional, e o contrário também vale.
 
+O projeto é estático — sem build, sem bundler, sem `npm install`. É por isso que
+o GitHub Pages consegue servi-lo direto da branch `main`, sem nenhuma etapa de
+publicação. Todos os caminhos são relativos, então o site funciona no subcaminho
+`/DeepLearning_C3_PPT/` sem ajuste.
+
 ## Caminho para a C3
 
 A estrutura já está preparada:
@@ -123,4 +150,10 @@ A estrutura já está preparada:
   ciclo completo — contagem, revelação, placar e rodada anulada — verificado no
   modo `?teste=1`.
 - **A captura por webcam física depende de teste manual** e não foi verificada
-  neste ambiente.
+  em ambiente automatizado.
+
+## Créditos
+
+Modelo, biblioteca e material de origem estão listados em
+[CREDITOS.md](CREDITOS.md). Nenhuma imagem ou som de terceiros é usado: os
+ícones dos gestos são emoji da fonte do sistema.
