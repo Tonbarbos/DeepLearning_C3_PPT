@@ -1,0 +1,13 @@
+# Dependências (o projeto roda sem instalar nada; isto é só precaução)
+node_modules/
+
+# Modelo do MediaPipe, caso alguém o baixe para rodar offline (~8 MB)
+modelos/*.task
+hand_landmarker.task
+
+# Lixo de sistema e de editor
+Thumbs.db
+desktop.ini
+.DS_Store
+.vscode/
+.idea/

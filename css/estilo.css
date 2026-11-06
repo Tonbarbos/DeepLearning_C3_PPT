@@ -1,0 +1,125 @@
+:root {
+  color-scheme: dark;
+  --fundo: #080b14;
+  --painel: #11182b;
+  --borda: #22304f;
+  --texto: #eef2ff;
+  --apagado: #94a1c2;
+  --destaque: #5cc8ff;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 32px 20px 64px;
+  background: radial-gradient(1200px 700px at 50% -10%, #142039, var(--fundo));
+  color: var(--texto);
+  font: 16px/1.6 system-ui, "Segoe UI", Roboto, sans-serif;
+}
+
+main {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+header { text-align: center; margin-bottom: 24px; }
+
+h1 {
+  margin: 0 0 8px;
+  font-size: clamp(26px, 4vw, 38px);
+  letter-spacing: -0.02em;
+}
+
+.sub {
+  margin: 0 auto;
+  max-width: 62ch;
+  color: var(--apagado);
+}
+
+.palco {
+  background: #000;
+  border: 1px solid var(--borda);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  line-height: 0;
+}
+
+#tela {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.barra {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 16px;
+}
+
+button {
+  padding: 10px 20px;
+  border: 1px solid var(--destaque);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--destaque);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+button:hover { background: var(--destaque); color: #06101c; }
+
+.dicas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: var(--apagado);
+  font-size: 14px;
+}
+
+kbd {
+  display: inline-block;
+  min-width: 22px;
+  padding: 1px 6px;
+  border: 1px solid var(--borda);
+  border-bottom-width: 2px;
+  border-radius: 6px;
+  background: var(--painel);
+  color: var(--texto);
+  font: 600 12px/1.6 ui-monospace, "Cascadia Code", Consolas, monospace;
+  text-align: center;
+}
+
+.ajuda {
+  margin-top: 32px;
+  padding: 20px 24px;
+  background: var(--painel);
+  border: 1px solid var(--borda);
+  border-radius: 14px;
+}
+
+.ajuda h2 { margin: 0 0 10px; font-size: 18px; }
+.ajuda ol { margin: 0; padding-left: 20px; }
+.ajuda li { margin-bottom: 4px; }
+
+.nota {
+  margin: 14px 0 0;
+  padding-top: 14px;
+  border-top: 1px solid var(--borda);
+  color: var(--apagado);
+  font-size: 15px;
+}
+
+@media (max-width: 640px) {
+  body { padding: 20px 12px 40px; }
+  .barra { justify-content: center; }
+}

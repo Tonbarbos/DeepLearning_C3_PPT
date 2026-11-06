@@ -1,0 +1,14 @@
+{
+  "name": "pedra-papel-tesoura",
+  "version": "1.0.0",
+  "description": "Pedra, papel e tesoura por gestos com MediaPipe Hand Landmarker (C2 - Visao Computacional)",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "test": "node js/testes.js",
+    "start": "python -m http.server 8000"
+  },
+  "dependencies": {
+    "@mediapipe/tasks-vision": "1.2.2"
+  }
+}

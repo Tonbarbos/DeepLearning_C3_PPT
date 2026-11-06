@@ -1,0 +1,64 @@
+<!doctype html>
+<!--
+  Pedra, papel e tesoura com MediaPipe Hand Landmarker — Visão Computacional, C2.
+
+  Execução (a câmera exige http://localhost ou https://, não funciona por file://):
+
+      python -m http.server 8000
+      # depois abra http://localhost:8000
+
+  Teclas: R reinicia a partida, E liga/desliga o esqueleto, D liga a depuração.
+-->
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pedra, papel e tesoura</title>
+  <link rel="stylesheet" href="css/estilo.css">
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Pedra, papel e tesoura</h1>
+      <p class="sub">
+        O gesto é reconhecido a partir dos 21 pontos da mão detectados pelo
+        MediaPipe. Mostre a mão para a câmera — a contagem começa sozinha.
+      </p>
+    </header>
+
+    <div class="palco">
+      <canvas id="tela" width="960" height="540"></canvas>
+    </div>
+
+    <section class="barra">
+      <button id="reiniciar" type="button">Nova partida</button>
+      <ul class="dicas">
+        <li><kbd>R</kbd> nova partida</li>
+        <li><kbd>E</kbd> esqueleto da mão</li>
+        <li><kbd>D</kbd> painel de depuração</li>
+      </ul>
+    </section>
+
+    <section class="ajuda">
+      <h2>Como jogar</h2>
+      <ol>
+        <li>Permita o acesso à câmera quando o navegador pedir.</li>
+        <li>Mostre a mão: depois de um instante a contagem de 3 começa.</li>
+        <li>Faça o gesto antes do fim da contagem e <strong>segure</strong> — a jogada
+          é travada pela leitura dos últimos meio segundo.</li>
+        <li>Vence a partida quem fizer 3 pontos primeiro.</li>
+      </ol>
+      <p class="nota">
+        Se a mão sair do quadro por mais de um segundo durante a contagem, ou se o
+        gesto não for reconhecido, a rodada é <strong>anulada</strong> e ninguém pontua.
+      </p>
+      <p class="nota">
+        Sem webcam? Acrescente <code>?teste=1</code> ao endereço para rodar o jogo
+        com uma mão simulada.
+      </p>
+    </section>
+  </main>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
